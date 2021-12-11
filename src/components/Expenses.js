@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import ChartComponent from './ChartComponent';
 import ExpenseItem from "./ExpenseItem";
 import './ExpenseItem.css';
 import ExpensesFilter from "./ExpensesFilter";
@@ -14,8 +15,10 @@ function Expenses(props)
     return(
     <div>
     <ExpensesFilter selectedYear={filteredYear} onChangeFilter={filterChangeHandler}></ExpensesFilter>
+    <ChartComponent expenses={filteredExpenses}/>
     <div className="expenses">
-    {filteredExpenses.map(expense=><ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date}/>)};   
+    {filteredExpenses.length===0 && <p>No expenses found</p>}
+    {filteredExpenses.length>0 && filteredExpenses.map(expense=><ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date}/>)};   
     
     </div>
     </div>)
